@@ -1,0 +1,30 @@
+# --- Python & Môi trường ảo ---
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Scrapy & Log
+.scrapy/
+*.log
+ghostdriver.log
+
+# Dữ liệu
+data/raw/*.json
+data/processed/*.json
+# CSV
+data/raw/*.csv
+data/processed/*.csv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Thư viện & IDE
+.vscode/
+.idea/
+.DS_Store
