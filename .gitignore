@@ -28,3 +28,5 @@ data/processed/*.csv
 .vscode/
 .idea/
 .DS_Store
+
+assets/*
