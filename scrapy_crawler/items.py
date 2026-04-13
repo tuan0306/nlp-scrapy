@@ -14,6 +14,8 @@ class ScrapyCrawlerItem(scrapy.Item):
 class ScrapyCrawlerMotel(scrapy.Item):
     title=scrapy.Field()
     price=scrapy.Field()
+    area=scrapy.Field()
     address=scrapy.Field()
     description=scrapy.Field()
     url=scrapy.Field()
+    telephone=scrapy.Field()
