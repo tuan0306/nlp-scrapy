@@ -8,7 +8,7 @@ class MotelSpider(scrapy.Spider):
     start_urls=['https://phongtro123.com/tinh-thanh/ho-chi-minh']
     
     def parse(self, response):
-        district_links=response.css('div.bg-white.shadow-sm.border.border-white.p-25.px-3.rounded-10px a::attr(href)').getall()
+        district_links=response.css('ul.row.gx-0 a::attr(href)').getall()
         
         for link in district_links:
             yield response.follow(link,callback=self.parse_district)
@@ -25,7 +25,15 @@ class MotelSpider(scrapy.Spider):
                 item['description']=data['description']
                 item['address']=data['address'].get('streetAddress')
                 item['url']=data['url']
-                yield item
+                yield response.follow(item['url'],callback=self.parse_description,cb_kwargs={'item':item})
+                
         next_page=response.css('ul.pagination a[rel="next"]::attr(href)').get()
         if next_page is not None:
             yield response.follow(next_page,callback=self.parse_district)
+            
+    def parse_description(self,response,item):
+        html_desc_pieces=response.xpath('//h2[contains(text(),"Thông tin mô tả")]/following-sibling::p//text()').getall()
+        if html_desc_pieces:
+            full_decs=" ".join([text.strip() for text in html_desc_pieces if text.strip()])
+            item['description']=full_decs
+        yield item
