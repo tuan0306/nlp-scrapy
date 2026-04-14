@@ -65,4 +65,3 @@ class DataCleaner:
             'url':raw_item.get('url'),
             'description_original':raw_item.get('description')
         }
-    
